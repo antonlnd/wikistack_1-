@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+var models = require('./models');
 var app = express();
 
 // view engine setup
@@ -34,6 +34,13 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+models.User.sync({force:true})
+.then(()  => {
+	return models.Page.sync({});
+}).catch(err => console.log);
+
+
 
 // error handler
 app.use(function(err, req, res, next) {

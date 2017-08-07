@@ -1,11 +1,14 @@
-var Sequelize = require('sequelize');
-var db = new Sequelize('postgres://localhost:4000/wikistack_1');
 
-var page = db.define('page',  {
+var Sequelize = require('sequelize');
+var db = new Sequelize('postgres://localhost:5432/wikistack_1', {
+	logging: false
+});
+
+var Page = db.define('page', {
 	title: {
 		type: Sequelize.STRING
 	},
-	urlTitle: 	{
+	urlTitle: {
 		type: Sequelize.STRING
 	},
 	content: {
@@ -16,57 +19,18 @@ var page = db.define('page',  {
 	}
 });
 
-var User = db.define('user',  {
+var User = db.define('user', {
 	name: {
 		type: Sequelize.STRING
 	},
-	email: 	{
+	email: {
 		type: Sequelize.STRING
 	}
-	});
+});
 
-db.sync().then(ret  => console.log('good job!'));
 
 module.exports = {
-Page: Page,
-User: User
+	Page: Page,
+	User: User
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports = sequelize;
