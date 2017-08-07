@@ -13,11 +13,15 @@ var Page = db.define('page', {
 		allowNull: false
 	},
 	content: {
-		type: Sequelize.STRING,
+		type: Sequelize.TEXT,
 		allowNull: false
 	},
 	status: {
-		type: Sequelize.STRING
+		type: Sequelize.ENUM('open','closed')
+	},
+	date: {
+		type: Sequelize.STRING,
+		defaultValue: Sequelize.NOW
 	}
 });
 
@@ -28,12 +32,14 @@ var User = db.define('user', {
 	},
 	email: {
 		type: Sequelize.STRING,
-		allowNull: false
-	}
-});
-
+		allowNull: false,
+		validate: {
+		isEmail: true
+		}
+}});
 
 module.exports = {
+	db: db,
 	Page: Page,
 	User: User
 };
